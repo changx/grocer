@@ -17,7 +17,7 @@ module Grocer
     end
 
     def connected?
-      !@ssl.nil?
+      !@ssl.nil? && !@ssl.closed?
     end
 
     def connect
