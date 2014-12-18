@@ -17,10 +17,12 @@ module Grocer
     end
 
     def connected?
-      !@ssl.nil?
+      #!@ssl.nil? && !@ssl.closed? 
+      !@sock.closed?
     end
 
     def connect
+      $stderr.write("connecting to apns gateway")
       context = OpenSSL::SSL::SSLContext.new
 
       if certificate
