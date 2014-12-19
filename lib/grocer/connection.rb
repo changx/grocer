@@ -19,6 +19,10 @@ module Grocer
       end
     end
 
+    def read_with_timeout(*args)
+      ssl.read_with_timeout(*args) if ssl
+    end
+
     def write(content)
       with_connection do
         ssl.write(content)
@@ -27,6 +31,10 @@ module Grocer
 
     def connect
       ssl.connect unless ssl.connected?
+    end
+
+    def close
+      ssl.disconnect
     end
 
     private

@@ -14,8 +14,11 @@ module Grocer
     }
 
     COMMAND = 8
+    LENGTH = 6
 
     attr_accessor :status_code, :identifier
+
+    attr_accessor :resend, :notification
 
     def initialize(binary_tuple)
       # C => 1 byte command
@@ -29,5 +32,14 @@ module Grocer
     def status
       STATUS_CODE_DESCRIPTIONS[status_code]
     end
+
+    def false_alarm?
+      status_code == 0
+    end
+
+    def invalid_token?
+      status_code == 8
+    end
+
   end
 end
